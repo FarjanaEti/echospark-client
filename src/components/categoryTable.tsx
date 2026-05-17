@@ -1,98 +1,117 @@
 "use client";
 
-import { toggleCategoryAction } from "@/app/action/toggleCategory.action";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
+import SearchInput from "@/components/ui/SearchInput";
+import TableFilter from "@/components/ui/TableFilter";
+import Pagination from "@/components/ui/Pagination";
+import { useTableData } from "@/hooks/useTableData";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL!;
+interface Category {
+  id: string;
+  name: string;
+  isActive: boolean;
+}
 
-export default function CategoryTable({ categories }: any) {
-  const router = useRouter();
-const [hiddenIds, setHiddenIds] = useState<string[]>([]);
+interface CategoryTableProps {
+  categories: Category[];
+}
 
-  const toggleCategory = async (id: string) => {
-    const res = await toggleCategoryAction(id);
-
-    if (!res.success) {
-      alert(res.message);
-      return;
-    }
-
-    router.refresh();
-  };
-
-
-const handleDelete = async (id: string) => {
-    if (!confirm("Deactivate this category?")) return;
-
-    const res = await toggleCategoryAction(id);
-
-    if (!res.success) {
-      alert(res.message);
-      return;
-    }
-    setHiddenIds((prev) => [...prev, id]);
-  };
-
-  
+export default function CategoryTable({ categories }: CategoryTableProps) {
+  const {
+    paginatedData,
+    searchQuery,
+    setSearchQuery,
+    currentPage,
+    setCurrentPage,
+    totalPages,
+    totalItems,
+  } = useTableData({
+    data: categories,
+    searchFields: ["name"],
+    itemsPerPage: 10,
+  });
 
   return (
-    <div className="overflow-x-auto rounded-2xl border bg-card shadow-sm">
-      <table className="min-w-full text-sm text-card-foreground">
-        <thead className="bg-muted text-xs uppercase text-muted-foreground">
-          <tr>
-            <th className="px-6 py-4">Name</th>
-            <th className="px-6 py-4">Status</th>
-            <th className="px-6 py-4">Created</th>
-            <th className="px-6 py-4 text-right">Actions</th>
-          </tr>
-        </thead>
+    <div className="space-y-4">
+      {/* Filters and Search */}
+      <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+        <div className="flex flex-col sm:flex-row gap-4">
+          <SearchInput
+            value={searchQuery}
+            onChange={setSearchQuery}
+            placeholder="Search categories..."
+            className="w-full sm:w-80"
+          />
+        </div>
+        <div className="text-sm text-muted-foreground">
+          {totalItems} categor{totalItems !== 1 ? "ies" : "y"} found
+        </div>
+      </div>
 
-        <tbody className="divide-y">
-          {categories 
-           .filter((cat: any) => !hiddenIds.includes(cat.id))
-          .map((category: any ) => (
-            <tr key={category.id}>
-              <td className="px-6 py-4 text-center font-medium">
-                {category.name}
-              </td>
-
-              <td className="px-6 py-4 text-center">
-                {category.isActive ? "Active" : "Inactive"}
-              </td>
-
-              <td className="px-6 text-center py-4">
-                {new Date(category.createdAt).toLocaleDateString()}
-              </td>
-
-              <td className="px-6 py-4 text-right">
-                <button
-                  onClick={() => toggleCategory(category.id)}
-                  className="text-primary mr-4"
-                >
-                  {category.isActive ? "Deactivate" : "Activate"}
-                </button>
-
-                <button
-                  onClick={() => handleDelete(category.id)}
-                  disabled={!category.isActive}
-                  className="text-destructive disabled:opacity-40"
-                >
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
-
-          {categories.length === 0 && (
+      {/* Table */}
+      <div className="overflow-x-auto rounded-2xl border bg-card shadow-sm">
+        <table className="min-w-full text-sm text-card-foreground text-left">
+          <thead className="bg-muted text-muted-foreground uppercase text-xs tracking-wider">
             <tr>
-              <td colSpan={4} className="py-6 text-center text-muted-foreground">
-                No categories found
-              </td>
+              <th className="px-6 py-4">Name</th>
+              <th className="px-6 py-4">Status</th>
+              <th className="px-6 py-4 text-right">Actions</th>
             </tr>
-          )}
-        </tbody>
-      </table>
+          </thead>
+
+          <tbody className="divide-y divide-border">
+            {paginatedData.length === 0 ? (
+              <tr>
+                <td
+                  colSpan={3}
+                  className="px-6 py-8 text-center text-muted-foreground"
+                >
+                  {searchQuery ? "No categories match your filters" : "No categories found"}
+                </td>
+              </tr>
+            ) : (
+              paginatedData.map((category) => (
+                <tr
+                  key={category.id}
+                  className="hover:bg-muted transition"
+                >
+                  <td className="px-6 py-4 font-medium text-card-foreground">
+                    {category.name}
+                  </td>
+
+                  <td className="px-6 py-4">
+                    {category.isActive ? (
+                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-accent/10 text-accent">
+                        Active
+                      </span>
+                    ) : (
+                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-destructive/10 text-destructive">
+                        Inactive
+                      </span>
+                    )}
+                  </td>
+
+                  <td className="px-6 py-4 text-right">
+                    <button
+                      className="text-destructive hover:text-destructive/80 text-sm font-medium"
+                    >
+                      {category.isActive ? "Deactivate" : "Activate"}
+                    </button>
+                  </td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Pagination */}
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={setCurrentPage}
+        className="justify-center"
+      />
     </div>
   );
 }

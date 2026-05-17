@@ -1,78 +1,38 @@
 import { NextRequest, NextResponse } from "next/server"
-import { userService } from "./src/services/user.service"
-import { Roles } from "./src/constant/roles"
 
 export async function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname
 
-  if (pathname.startsWith("/verify-email")) {
-    return NextResponse.next();
-  }
+  const sessionToken = request.cookies.get("better-auth.session_token")
 
-    const sessionToken = request.cookies.get("better-auth.session_token");
-
-     if (!sessionToken) {
-    return NextResponse.redirect(new URL("/login", request.url));
-  }
-
-
-  const { data } = await userService.getSession()
-
-  //  Not authenticated
-  if (!data?.user) {
+  if (!sessionToken) {
     return NextResponse.redirect(new URL("/login", request.url))
   }
 
-  const role = data.user.role
+  // fetch session from backend
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/get-session`, {
+    headers: {
+      cookie: `better-auth.session_token=${sessionToken.value}`,
+    },
+  })
 
-  //  Admin rules
-  if (role === Roles.admin && pathname.startsWith("/dashboard")) {
-    return NextResponse.redirect(new URL("/admin-dashboard", request.url))
+  const data = await res.json()
+  const user = data?.user
+
+  if (!user) {
+    return NextResponse.redirect(new URL("/login", request.url))
   }
 
-  //  Provider rules
-  if (role === Roles.provider && pathname.startsWith("/dashboard")) {
-    return NextResponse.redirect(
-      new URL("/provider-dashboard", request.url)
-    )
+  const role = user.role
+
+  // if MEMBER tries to access admin dashboard → redirect to member
+  if (role === "MEMBER" && pathname.startsWith("/dashboard/admin")) {
+    return NextResponse.redirect(new URL("/dashboard/member", request.url))
   }
 
-  //  Customer rules
-  if (
-    role === Roles.customer &&
-    (pathname.startsWith("/admin-dashboard") ||
-      pathname.startsWith("/provider-dashboard"))
-  ) {
-    return NextResponse.redirect(new URL("/dashboard", request.url))
-  }
-
-  //  Block cross-access for admin/provider
-  if (
-    role !== Roles.admin &&
-    pathname.startsWith("/admin-dashboard")
-  ) {
-    return NextResponse.redirect(
-      new URL(
-        role === Roles.provider
-          ? "/provider-dashboard"
-          : "/dashboard",
-        request.url
-      )
-    )
-  }
-
-  if (
-    role !== Roles.provider &&
-    pathname.startsWith("/provider-dashboard")
-  ) {
-    return NextResponse.redirect(
-      new URL(
-        role === Roles.admin
-          ? "/admin-dashboard"
-          : "/dashboard",
-        request.url
-      )
-    )
+  // if ADMIN tries to access member dashboard → redirect to admin
+  if (role === "ADMIN" && pathname.startsWith("/dashboard/member")) {
+    return NextResponse.redirect(new URL("/dashboard/admin", request.url))
   }
 
   return NextResponse.next()
@@ -81,7 +41,5 @@ export async function proxy(request: NextRequest) {
 export const config = {
   matcher: [
     "/dashboard/:path*",
-    "/provider-dashboard/:path*",
-    "/admin-dashboard/:path*",
   ],
 }

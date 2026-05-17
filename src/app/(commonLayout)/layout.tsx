@@ -1,20 +1,12 @@
-export const dynamic = 'force-dynamic';
-import ConditionalWhyUs from "@/components/conditional";
-import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 
-export default function CommonLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  
+export default function CommonLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div>
-      <Navbar></Navbar>
+    <>
+      <Navbar />
       {children}
-    <ConditionalWhyUs></ConditionalWhyUs>
-      <Footer></Footer>
-    </div>
+      <Footer />
+    </>
   );
 }

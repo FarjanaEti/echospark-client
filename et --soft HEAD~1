@@ -1,0 +1,50 @@
+[33md83c101[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m client dashboard
+[33m44cf501[m demo login
+[33md2fc500[m recommendation added
+[33m242a5ed[m ai search added
+[33mbc24f09[m contact us page added
+[33m928bbce[m wishlist and dropdown profile added
+[33ma011351[m category feature and search
+[33m98c6990[m about us FAQ and review section added
+[33m7ecfa23[m final
+[33m5b97504[m provider edit meal fixed
+[33m093a4f7[m deployment issue fixed
+[33m94e8f42[m resturent with rating
+[33m8a9a35f[m clear cart after order
+[33m100495e[m pagination on all meal page
+[33ma6b5243[m top rated meal and most selling meal page added
+[33m502e9f0[m payment history added to admin provider and customer
+[33m4346f9c[m payment added
+[33mc90dd60[m final
+[33m7077612[m email verified
+[33m263ab09[m admin user and provider fix
+[33meeaba2a[m add menu and provider fixed with action
+[33m0795d76[m session
+[33ma88f767[m vercel error fix
+[33mc64f7d7[m deploed in vercel
+[33m1901842[m filter meals
+[33m31a404f[m review added
+[33m34ecc04[m cart added and remove
+[33me2fe2db[m cart added to the schema
+[33m1a622a3[m provider profile created
+[33mfc6febb[m provider order and details
+[33m6f9a239[m user get and update
+[33m8bf090b[m category toggle delete
+[33m6d3824f[m category added
+[33ma273d9e[m provider get their own meals
+[33m2831b27[m logout
+[33m501a95c[m resturent data provider with their menu
+[33m0f061ce[m add menu by provider
+[33mae2774f[m order get by role
+[33me521cfe[m admin get all category and all user had a error
+[33m6a175a2[m all provider fetched
+[33m81c1bcb[m dashboard layout fixed
+[33m03226d2[m services env proxy and provider dashboard
+[33m9c60fc5[m registation done
+[33md5a7afb[m so far only dashboard layout is implemented
+[33m9493e31[m dashboard ar fokira design kora hoice
+[33m6959825[m why us
+[33m8bca217[m footer and why us
+[33m2ec1cd7[m banner added
+[33md613b71[m first commit
+[33me88fdd7[m Initial commit from Create Next App

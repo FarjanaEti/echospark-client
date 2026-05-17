@@ -1,15 +1,18 @@
-import Link from "next/link"
-import { cn } from "@/lib/utils"
-import React from "react"
-import { Home } from "lucide-react"
+import Link from "next/link";
+import { cn } from "@/lib/utils";
+import { Home } from "lucide-react";
 
 type SidebarItemProps = {
-  label: string
-  href: string
-  icon?: React.ReactNode
-}
+  label: string;
+  href: string;
+  icon?: React.ElementType;
+};
 
-export function SidebarItem({ label, href, icon }: SidebarItemProps) {
+export function SidebarItem({
+  label,
+  href,
+  icon: Icon,
+}: SidebarItemProps) {
   return (
     <Link
       href={href}
@@ -18,10 +21,11 @@ export function SidebarItem({ label, href, icon }: SidebarItemProps) {
         "hover:bg-primary/10 hover:text-primary text-foreground/70"
       )}
     >
-      <span className="text-muted-foreground group-hover:text-primary transition-colors">
-        {icon || <Home size={18} />}
+      <span className="text-muted-foreground transition-colors">
+        {Icon ? <Icon size={18} /> : <Home size={18} />}
       </span>
+
       {label}
     </Link>
-  )
+  );
 }
