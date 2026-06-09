@@ -13,8 +13,7 @@ const categoryIcons: Record<string, string> = {
 export default async function CategorySection() {
   let categories = [];
   try {
-    const res = await getAllCategories();
-    categories = res.data || [];
+    categories = await getAllCategories();
   } catch {}
 
   return (

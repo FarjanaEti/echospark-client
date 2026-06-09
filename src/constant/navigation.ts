@@ -27,7 +27,7 @@ export const ROLE_NAVIGATION: RoleNavigation = {
     { label: "Dashboard", href: "/dashboard/member", icon: LayoutDashboard },
     { label: "My Profile", href: "/dashboard/profile", icon: UserCircle },
     { label: "My Ideas", href: "/dashboard/ideas", icon: Lightbulb },
-    { label: "Submit Idea", href: "/dashboard/ideas/new", icon: PlusCircle },
+    { label: "Submit Idea", href: "/dashboard/add-ideas", icon: PlusCircle },
     { label: "My Comments", href: "/dashboard/comments", icon: MessageSquare },
     { label: "My Reviews", href: "/dashboard/reviews", icon: Star },
     { label: "Settings", href: "/dashboard/member/settings", icon: Settings },

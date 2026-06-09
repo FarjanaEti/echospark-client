@@ -2,7 +2,10 @@ import { api } from "@/lib/api";
 
 export const getAllCategories = async () => {
     const res = await api.get("/categories");
-    return res.data;
+    const data = res.data;
+    if (Array.isArray(data)) return data;
+    if (Array.isArray(data?.data)) return data.data;
+    return [];
 };
 
 

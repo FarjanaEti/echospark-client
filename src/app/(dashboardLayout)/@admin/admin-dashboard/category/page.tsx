@@ -9,7 +9,7 @@ export default function ManageCategoriesPage() {
   const [loading, setLoading] = useState(false);
 
   const load = async () => {
-    try { const res = await getAllCategories(); setCategories(res.data || []); }
+    try { const res = await getAllCategories(); setCategories(res); }
     catch { toast.error("Failed to load"); }
   };
 
