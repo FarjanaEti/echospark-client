@@ -1,23 +1,34 @@
 "use server";
 
-import { categoryService } from "@/services/category.service";
+import { createCategory } from "@/services/category.service";
 
 export async function createCategoryAction(formData: FormData) {
   const name = formData.get("name") as string;
-  const isActive = formData.get("isActive") === "on";
+  const isActive = formData.get("isActive") === "true";
 
-  if (!name || !name.trim()) {
-    return { success: false, message: "Category name is required." };
+  try {
+    const result = await createCategory({
+      name: name.trim(),
+      isActive,
+    });
+
+    // console.log("SUCCESS:", result);
+
+    return {
+      success: true,
+      message: "Category added successfully.",
+    };
+  } catch (err: any) {
+    // console.log("STATUS:", err?.response?.status);
+    // console.log("DATA:", err?.response?.data);
+    // console.log("MESSAGE:", err?.message);
+
+    return {
+      success: false,
+      message:
+        err?.response?.data?.message ||
+        err?.message ||
+        "Failed to create category.",
+    };
   }
-
-  const { data, error } = await categoryService.createCategory({
-    name: name.trim(),
-    isActive,
-  });
-
-  if (error) {
-    return { success: false, message: error.message };
-  }
-
-  return { success: true, message: "Category added successfully." };
 }

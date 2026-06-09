@@ -20,8 +20,8 @@ export default function Navbar() {
   }, []);
 
   const dashboardUrl =
-    (user as any)?.role === "ADMIN" ? "/dashboard/admin" : "/dashboard/member";
-
+    (user as any)?.role === "ADMIN" ? "/admin-dashboard" : "/dashboard";
+//const dashboardUrl = "/dashboard";
   const links = [
     { title: "Home", url: "/" },
     { title: "Ideas", url: "/ideas" },

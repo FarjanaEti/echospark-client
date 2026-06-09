@@ -4,7 +4,8 @@ import { redirect } from "next/navigation";
 import { Leaf } from "lucide-react";
 import { ROLE_NAVIGATION } from "@/constant/navigation";
 import { SidebarItem } from "@/components/ui/sidebarItem";
-import { getMyProfile } from "@/services/user.service";
+import { userService } from "@/services/user.service";
+//import { getMyProfile } from "@/services/user.service";
 
 export default async function DashboardLayout({
   admin,
@@ -13,9 +14,11 @@ export default async function DashboardLayout({
   admin: React.ReactNode;
   member: React.ReactNode;
 }) {
-  const { data } = await getMyProfile();
-  const user = data?.user;
+ 
 
+ const { data } = await userService.getSession()
+  const user = data?.user
+console.log("session user",user)
   if (!user) {
     redirect("/login");
   }

@@ -2,12 +2,12 @@ import { api } from "@/lib/api";
 import { Idea } from "@/types";
 
 export const getAllIdeas = async (params?: {
-                              search?: string;
-                              categoryId?: string;
-                              isPaid?: boolean;
-                              sortBy?: string;
-                              page?: number;
-                              limit?: number;
+ search?: string;
+ categoryId?: string;
+ isPaid?: boolean;
+ sortBy?: string;
+ page?: number;
+ limit?: number;
 }) => {
                               const query = new URLSearchParams();
                               if (params?.search) query.append("search", params.search);
