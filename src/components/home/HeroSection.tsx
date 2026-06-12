@@ -25,7 +25,7 @@ export default function HeroSection() {
       </video>
 
       {/* Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-green-950/70 via-green-900/60 to-green-950/80" />
+      <div className="absolute inset-0 bg-linear-to-b from-green-950/70 via-green-900/60 to-green-950/80" />
 
       {/* Organic shape bottom */}
       <div className="absolute bottom-0 left-0 right-0">
@@ -55,7 +55,7 @@ export default function HeroSection() {
 
         <div className="flex flex-wrap gap-4 justify-center">
           <Link
-            href="/ideas"
+            href="/idea"
             className="px-6 py-3 bg-white text-green-900 rounded-full font-medium hover:bg-green-50 transition-colors"
           >
             Explore Ideas
