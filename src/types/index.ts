@@ -1,1 +1,1 @@
-export type * from "./routs.type"
+export * from "./routs.type"

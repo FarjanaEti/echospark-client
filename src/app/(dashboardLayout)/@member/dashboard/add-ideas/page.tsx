@@ -260,7 +260,7 @@ export default function AddIdeaPage() {
                   onChange={(e) => setIsPaid(e.target.checked)}
                   className="sr-only peer"
                 />
-                <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-2 peer-focus:ring-green-400/20 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600"></div>
+                <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-2 peer-focus:ring-green-400/20 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600"></div>
               </label>
             </div>
 
@@ -293,7 +293,7 @@ export default function AddIdeaPage() {
 
         {/* INTERACTIVE RECOMMENDATION PANEL (5 Columns) */}
         <div className="lg:col-span-5 space-y-4 lg:sticky lg:top-6">
-          <div className="bg-gradient-to-br from-green-900 to-emerald-950 text-emerald-50 rounded-xl p-5 shadow-sm border border-emerald-800">
+          <div className="bg-linear-to-br from-green-900 to-emerald-950 text-emerald-50 rounded-xl p-5 shadow-sm border border-emerald-800">
             <div className="flex items-center gap-2 mb-3">
               <span className="text-xl">💡</span>
               <h3 className="font-bold text-base tracking-wide uppercase text-emerald-300">

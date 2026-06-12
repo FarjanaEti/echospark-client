@@ -69,12 +69,12 @@ console.log("session user",user)
             </p>
             <div className="flex items-center gap-3">
               <div className="h-8 w-8 rounded-full bg-green-100 flex items-center justify-center text-green-700 font-bold text-xs">
-                {user.name?.charAt(0)}
+                {user?.name?.charAt(0)}
               </div>
               <div className="truncate">
-                <p className="text-sm font-bold truncate">{user.name}</p>
+                <p className="text-sm font-bold truncate">{user?.name}</p>
                 <p className="text-[10px] text-muted-foreground truncate">
-                  {user.email}
+                  {user?.email}
                 </p>
                 <span className="inline-block mt-1 text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-green-100 text-green-700">
                   {role}
@@ -95,11 +95,11 @@ console.log("session user",user)
           </h1>
           <div className="flex items-center gap-3">
             <div className="h-8 w-8 rounded-full bg-green-100 flex items-center justify-center text-green-700 font-bold text-sm">
-              {user.name?.charAt(0)}
+              {user?.name?.charAt(0)}
             </div>
             <div className="hidden md:block">
-              <p className="text-sm font-bold leading-none">{user.name}</p>
-              <p className="text-xs text-muted-foreground">{user.email}</p>
+              <p className="text-sm font-bold leading-none">{user?.name}</p>
+              <p className="text-xs text-muted-foreground">{user?.email}</p>
             </div>
           </div>
         </header>

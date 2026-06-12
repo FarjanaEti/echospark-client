@@ -49,7 +49,7 @@ export default function IdeaCard({ idea }: { idea: Idea }) {
             </span>
           </div>
           <Link
-            href={`/ideas/${idea.id}`}
+            href={`/idea/${idea.id}`}
             className="text-xs px-3 py-1.5 bg-green-700 text-white rounded-full hover:bg-green-800 transition-colors"
           >
             View idea

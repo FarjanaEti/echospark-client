@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 export default function Navbar() {
   const { data } = useSession();
   const user = data?.user;
+  console.log(user)
   const router = useRouter();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -24,7 +25,7 @@ export default function Navbar() {
 //const dashboardUrl = "/dashboard";
   const links = [
     { title: "Home", url: "/" },
-    { title: "Ideas", url: "/ideas" },
+    { title: "Ideas", url: "/idea" },
     { title: "About", url: "/about" },
     { title: "Blog", url: "/blog" },
     ...(user ? [{ title: "Dashboard", url: dashboardUrl }] : []),

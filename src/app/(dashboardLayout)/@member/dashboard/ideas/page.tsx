@@ -41,7 +41,7 @@ export default function MyIdeasPage() {
     <div>
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-2xl font-semibold text-green-900">My Ideas</h2>
-        <Link href="/dashboard/member/ideas/new" className="px-4 py-2 bg-green-700 text-white rounded-xl text-sm hover:bg-green-800">
+        <Link href="/dashboard/add-ideas" className="px-4 py-2 bg-green-700 text-white rounded-xl text-sm hover:bg-green-800">
           + New idea
         </Link>
       </div>

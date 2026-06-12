@@ -39,7 +39,6 @@ export const userService = {
       const cookieStore = await cookies();
       const allCookies = cookieStore.getAll();
       
-      
       const cookieHeader = allCookies
         .map((c: { name: string; value: string }) => `${c.name}=${c.value}`)
         .join("; ");
@@ -54,14 +53,14 @@ export const userService = {
         },
         cache: "no-store",
       });
-
+console.log("status", res.status);
       const session = await res.json();
     
 
       if (session?.user) {
         return { data: session, error: null };
       }
-
+console.log("session response", session);
       return { data: null, error: { message: "No session" } };
     } catch (err) {
       console.error("Session error:", err);

@@ -22,7 +22,7 @@ export default async function FeaturedIdeas() {
             </p>
           </div>
           <Link
-            href="/ideas"
+            href="/idea"
             className="text-sm text-green-700 hover:text-green-900 font-medium"
           >
             View all →
