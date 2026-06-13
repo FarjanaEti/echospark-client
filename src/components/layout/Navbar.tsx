@@ -28,6 +28,7 @@ export default function Navbar() {
     { title: "Ideas", url: "/idea" },
     { title: "About", url: "/about" },
     { title: "Blog", url: "/blog" },
+    { title: "AI Assistant", url: "/ai-assistant" },
     ...(user ? [{ title: "Dashboard", url: dashboardUrl }] : []),
   ];
 
